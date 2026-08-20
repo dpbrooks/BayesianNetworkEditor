@@ -1,0 +1,102 @@
+{
+  "name": "Alarm Network (classic AIMA example)",
+  "nodes": [
+    {
+      "name": "Burglary",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [],
+      "cpt": {
+        "": [
+          0.001,
+          0.999
+        ]
+      }
+    },
+    {
+      "name": "Earthquake",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [],
+      "cpt": {
+        "": [
+          0.002,
+          0.998
+        ]
+      }
+    },
+    {
+      "name": "Alarm",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Burglary",
+        "Earthquake"
+      ],
+      "cpt": {
+        "True|True": [
+          0.95,
+          0.05
+        ],
+        "True|False": [
+          0.94,
+          0.06
+        ],
+        "False|True": [
+          0.29,
+          0.71
+        ],
+        "False|False": [
+          0.001,
+          0.999
+        ]
+      }
+    },
+    {
+      "name": "JohnCalls",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Alarm"
+      ],
+      "cpt": {
+        "True": [
+          0.9,
+          0.1
+        ],
+        "False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "MaryCalls",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Alarm"
+      ],
+      "cpt": {
+        "True": [
+          0.7,
+          0.3
+        ],
+        "False": [
+          0.01,
+          0.99
+        ]
+      }
+    }
+  ]
+}
