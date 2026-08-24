@@ -60,7 +60,8 @@ class CLIView:
             ("Save", "Save network as a json file"),
             ("Load", "Loads a network from a json file"),
             ("New", "Starts a new network"),
-            ("Quit", "Exits the program")
+            ("Export", "Exports network as a graphic (SVG)"),
+            ("Quit/Exit", "Exits the program")
         ]
         for key, label in commands:
             print(f"  {key:<15}-> {label}")
@@ -254,5 +255,14 @@ class CLIView:
         raw = self.prompt("Name for the new network [default: Untitled Network]")
         return raw if raw else "Untitled Network"
 
+    # ------------------------------------------------------------------
+    # Graphic export
+    # ------------------------------------------------------------------
+    def get_graphic_filename(self, default_name):
+        raw = self.prompt(
+            f"Filename for the graphic, saved under ./Graphics/ [default: {default_name}]"
+        )
+        return raw if raw else default_name
+    
     def show_goodbye(self):
         self.show_message("\nGoodbye!")

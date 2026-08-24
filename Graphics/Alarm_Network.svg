@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="344" height="520" viewBox="0 0 344 520" font-family="Helvetica, Arial, sans-serif"><rect x="0" y="0" width="344" height="520" fill="white"/>
+<defs><marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#333333"/></marker></defs>
+<line x1="97.0" y1="100.0" x2="180.0" y2="190.0" stroke="#333333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+<line x1="239.0" y1="100.0" x2="180.0" y2="190.0" stroke="#333333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+<line x1="180.0" y1="240.0" x2="101.0" y2="330.0" stroke="#333333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+<line x1="180.0" y1="240.0" x2="243.0" y2="330.0" stroke="#333333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+<rect x="50.0" y="50.0" width="94.0" height="50" rx="10" ry="10" fill="#eaf2ff" stroke="#2c5aa0" stroke-width="1.5"/><text x="97.0" y="75.0" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#1a1a1a">Burglary</text>
+<rect x="184.0" y="50.0" width="110.0" height="50" rx="10" ry="10" fill="#eaf2ff" stroke="#2c5aa0" stroke-width="1.5"/><text x="239.0" y="75.0" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#1a1a1a">Earthquake</text>
+<rect x="135.0" y="190.0" width="90.0" height="50" rx="10" ry="10" fill="#eaf2ff" stroke="#2c5aa0" stroke-width="1.5"/><text x="180.0" y="215.0" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#1a1a1a">Alarm</text>
+<rect x="50.0" y="330.0" width="102.0" height="50" rx="10" ry="10" fill="#eaf2ff" stroke="#2c5aa0" stroke-width="1.5"/><text x="101.0" y="355.0" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#1a1a1a">JohnCalls</text>
+<rect x="192.0" y="330.0" width="102.0" height="50" rx="10" ry="10" fill="#eaf2ff" stroke="#2c5aa0" stroke-width="1.5"/><text x="243.0" y="355.0" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#1a1a1a">MaryCalls</text>
+</svg>

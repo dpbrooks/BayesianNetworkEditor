@@ -7,15 +7,20 @@ handler methods, and is the only layer that both calls model mutations
 AND tells the view what to display. Neither Model nor View know about
 each other.
 """
+
+import os
  
 from model.network import BayesianNetwork, NetworkError
 from model.inference import query as run_inference, InferenceError
- 
+from view.graph_view import GraphView
+
+GRAPHICS_DIR = "Graphics"
  
 class BayesianNetworkController:
-    def __init__(self, model=None, view=None):
+    def __init__(self, model=None, view=None, graph_view=None):
         self.network = model if model is not None else BayesianNetwork()
         self.view = view
+        self.graph_view = graph_view if graph_view is not None else GraphView()
  
     # ------------------------------------------------------------------
     # Main loop
@@ -37,6 +42,7 @@ class BayesianNetworkController:
             "save": self.save_network,
             "load": self.load_network,
             "new": self.new_network,
+            "export": self.export_graphic,
             "quit": None,
             "exit": None,
         }
@@ -248,4 +254,38 @@ class BayesianNetworkController:
         name = self.view.get_new_network_name()
         self.network = BayesianNetwork(name=name)
         self.view.show_success(f"Started new network '{name}'.")
+
+    # ------------------------------------------------------------------
+    # Graphic export
+    # ------------------------------------------------------------------
+    def export_graphic(self):
+        if not self.network.nodes:
+            self.view.show_error("There are no nodes to draw.")
+            return
+ 
+        # topological_order() (not node_names()) is required here: a node
+        # can be added before the node that later becomes its parent, so
+        # insertion order alone doesn't guarantee parents precede children.
+        # GraphView's level-assignment depends on that guarantee.
+        order = self.network.topological_order()
+        nodes_data = [
+            {"name": name, "parents": self.network.get_node(name).parents}
+            for name in order
+        ]
+        svg_content = self.graph_view.render_svg(nodes_data)
+ 
+        default_filename = f"{self.network.name.replace(' ', '_')}.svg"
+        filename = self.view.get_graphic_filename(default_filename)
+        if not filename:
+            self.view.show_error("Export cancelled - no filename given.")
+            return
+        if not filename.lower().endswith(".svg"):
+            filename += ".svg"
+ 
+        os.makedirs(GRAPHICS_DIR, exist_ok=True)
+        filepath = os.path.join(GRAPHICS_DIR, filename)
+        with open(filepath, "w") as f:
+            f.write(svg_content)
+ 
+        self.view.show_success(f"Network graphic saved to '{filepath}'.")
  

@@ -1,4 +1,4 @@
-# Bayesian Network Builder (CLI)
+# Bayesian Network Editor (CLI)
 
 A command-line tool for building custom Bayesian Networks: define nodes,
 their possible states, the dependencies (edges) between them, and their
@@ -9,7 +9,7 @@ from JSON files.
 ## Design: Model-View-Controller
 
 ```
-bn_cli/
+BayesianNetworkEditor/
 ├── main.py                      # entry point - wires Model, View, Controller together
 ├── model/
 │   ├── node.py                  # Node: a single variable, its states & CPT
@@ -20,8 +20,11 @@ bn_cli/
 ├── controller/
 │   └── controller.py             # main loop; translates menu choices into
 │                                  # model calls + view calls
-└── examples/
-    └── alarm_network.json        # classic "Burglary/Earthquake/Alarm" example (AIMA)
+├── examples/
+│   └── alarm_network.json        # classic "Burglary/Earthquake/Alarm" example (AIMA)
+│
+└── Graphics/
+    └── Alarm_Network.svg         # graphic of the "Burglary/Earthquake/Alarm" example
 ```
 
 - **Model** (`model/`): pure Python, no I/O. `Node` holds a variable's
@@ -43,7 +46,7 @@ without touching `model/` at all.
 ## Running it
 
 ```bash
-cd bn_cli
+cd BayesianNetworkEditor
 python3 main.py
 ```
 
@@ -67,31 +70,37 @@ Commands:
   Save                Save network as a json file
   Load                Loads a network from a json file
   New                 Starts a new network
-  Quit                Exits the program
+  Export              Exports network as a graphic (SVG)
+  Quit/Exit           Exits the program
   ```
 
 
 ### Typical workflow
 
-1. **Add nodes** (option 1) - give each a name and comma-separated states,
+1. **Add nodes** (option 2) - give each a name and comma-separated states,
    e.g. name `Rain`, states `Yes,No`.
-2. **Add dependencies** (option 3) - e.g. parent `Rain`, child `Umbrella`
+2. **Add dependencies** (option 5) - e.g. parent `Rain`, child `Umbrella`
    means Umbrella's probability depends on Rain. Cycles are rejected.
-3. **Define CPTs** (option 5) - for each node, you'll be walked through
+3. **Define CPTs** (option 7) - for each node, you'll be walked through
    every combination of its parents' states and asked for a probability
    per state of the node itself (must sum to 1.0). Root nodes (no parents)
    just need one row - their prior.
-4. **Validate** (option 8) - checks the network is a DAG and every node has
-   a complete CPT.
-5. **Query** (option 9) - pick a variable to ask about, optionally enter
+4. **Validate** (option 10) - checks the network is a DAG and every node
+   has a complete CPT.
+5. **Query** (option 11) - pick a variable to ask about, optionally enter
    evidence (known values) for other variables, and get back the exact
    posterior distribution.
-6. **Save / Load** (options 10/11) - persist your network as JSON, or load
+6. **Save / Load** (options 12/13) - persist your network as JSON, or load
    one back later (including the bundled example).
+7. **Export a diagram** (option 15) - draws the current network as boxes
+   and arrows and saves it as an `.svg` file under `./Graphics/`.
+8. **Rename** things anytime - the network itself (option 1) or an
+   individual node (option 4). Renaming a node updates every edge that
+   references it and preserves its CPT and position in listings.
 
 ### Try the bundled example
 
-From the `bn_cli` directory, choose option 11 and enter:
+From the `BayesianNetworkEditor` directory, enter the load command and then enter:
 
 ```
 examples/alarm_network.json
@@ -143,6 +152,21 @@ and all remaining (hidden) variables are summed out in topological order
 using the chain rule of the network. This is exact (not sampling-based),
 which is appropriate for the small/medium hand-built networks this tool
 targets.
+
+## Graphic export
+
+Option 15 renders the current network to a standalone `.svg` file under
+`./Graphics/` (created automatically). Nodes are laid out in layers -
+level 0 for root nodes (no parents), and each other node one level below
+the deepest of its parents - with arrows drawn from each parent down to
+its children. Box width adapts to the node name's length.
+
+This is pure Python string-building (no matplotlib/graphviz/networkx
+dependency), so the output opens in any browser or vector image viewer
+with nothing extra to install. Nodes are exported in the network's
+topological order (parents before children) regardless of the order
+they were originally added in, since layering depends on a parent's
+level being known before its children's.
 
 ## Extending
 
