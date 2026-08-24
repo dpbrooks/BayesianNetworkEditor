@@ -77,25 +77,25 @@ Commands:
 
 ### Typical workflow
 
-1. **Add nodes** (option 2) - give each a name and comma-separated states,
+1. **Add nodes** - give each a name and comma-separated states,
    e.g. name `Rain`, states `Yes,No`.
-2. **Add dependencies** (option 5) - e.g. parent `Rain`, child `Umbrella`
+2. **Add dependencies** - e.g. parent `Rain`, child `Umbrella`
    means Umbrella's probability depends on Rain. Cycles are rejected.
-3. **Define CPTs** (option 7) - for each node, you'll be walked through
+3. **Define CPTs** - for each node, you'll be walked through
    every combination of its parents' states and asked for a probability
    per state of the node itself (must sum to 1.0). Root nodes (no parents)
    just need one row - their prior.
-4. **Validate** (option 10) - checks the network is a DAG and every node
+4. **Validate** - checks the network is a DAG and every node
    has a complete CPT.
-5. **Query** (option 11) - pick a variable to ask about, optionally enter
+5. **Query** - pick a variable to ask about, optionally enter
    evidence (known values) for other variables, and get back the exact
    posterior distribution.
-6. **Save / Load** (options 12/13) - persist your network as JSON, or load
+6. **Save / Load** - persist your network as JSON, or load
    one back later (including the bundled example).
-7. **Export a diagram** (option 15) - draws the current network as boxes
+7. **Export a diagram** - draws the current network as boxes
    and arrows and saves it as an `.svg` file under `./Graphics/`.
-8. **Rename** things anytime - the network itself (option 1) or an
-   individual node (option 4). Renaming a node updates every edge that
+8. **Rename** things anytime - the network itself or an
+   individual node. Renaming a node updates every edge that
    references it and preserves its CPT and position in listings.
 
 ### Try the bundled example
