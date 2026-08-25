@@ -19,10 +19,10 @@ def main():
     view = CLIView()
     controller = BayesianNetworkController(model=model, view=view)
 
-    view.show_message("Welcome to the Bayesian Network Builder.")
+    view.show_message("Welcome to the Bayesian Network Editor.")
     view.show_message(
-        "Build a network from scratch (options 1-5), or load an example / saved "
-        "file (option 11) to explore inference (option 9) right away.\n"
+        "Build a network from scratch, or load an example / saved "
+        "file to explore inference right away.\n"
         "Tip: try loading 'examples/alarm_network.json' to see a worked example."
     )
     controller.run()

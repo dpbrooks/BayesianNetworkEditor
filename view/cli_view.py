@@ -7,9 +7,6 @@ nothing about Node/BayesianNetwork internals beyond simple data it's handed
 This keeps the View swappable (e.g. for a future GUI) without touching logic.
 """
 
-import itertools
-
-
 class CLIView:
     # ------------------------------------------------------------------
     # Generic helpers
@@ -106,8 +103,12 @@ class CLIView:
     # ------------------------------------------------------------------
     def get_edge_info(self, node_names, action="add"):
         self._list_nodes_inline(node_names)
-        parent = self.prompt(f"Parent node (the cause){''}")
-        child = self.prompt("Child node (the effect, depends on the parent)")
+        if action == "remove":
+            parent = self.prompt("Parent node (in the existing dependency to remove)")
+            child = self.prompt("Child node (in the existing dependency to remove)")
+        else:
+            parent = self.prompt("Parent node (the cause)")
+            child = self.prompt("Child node (the effect, depends on the parent)")
         return parent, child
 
     # ------------------------------------------------------------------
@@ -136,9 +137,7 @@ class CLIView:
             self.show_message("\n  (no conditions - prior probability)")
 
         probs = []
-        remaining = 1.0
         for i, state in enumerate(states):
-            is_last = i == len(states) - 1
             while True:
                 raw = self.prompt(f"    P({node_name} = {state})")
                 try:

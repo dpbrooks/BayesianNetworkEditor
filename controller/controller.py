@@ -133,7 +133,7 @@ class BayesianNetworkController:
         self.network.add_edge(parent, child)
         self.view.show_success(
             f"'{child}' now depends on '{parent}'. "
-            f"Note: '{child}' CPT was reset - define it via option 5."
+            f"Note: '{child}' CPT was reset - define it via 'Define CPT' command."
         )
  
     def remove_edge(self):
