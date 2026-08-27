@@ -1,0 +1,1039 @@
+{
+  "name": "50-Node Complex Network",
+  "nodes": [
+    {
+      "name": "Node_1",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [],
+      "cpt": {
+        "": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "name": "Node_2",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_1"
+      ],
+      "cpt": {}
+    },
+    {
+      "name": "Node_3",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [],
+      "cpt": {
+        "": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "name": "Node_4",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [],
+      "cpt": {
+        "": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "name": "Node_5",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [],
+      "cpt": {
+        "": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "name": "Node_6",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_1"
+      ],
+      "cpt": {
+        "True": [
+          0.8,
+          0.2
+        ],
+        "False": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    {
+      "name": "Node_7",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_2"
+      ],
+      "cpt": {
+        "True": [
+          0.8,
+          0.2
+        ],
+        "False": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    {
+      "name": "Node_8",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_3"
+      ],
+      "cpt": {
+        "True": [
+          0.8,
+          0.2
+        ],
+        "False": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    {
+      "name": "Node_9",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_4"
+      ],
+      "cpt": {
+        "True": [
+          0.8,
+          0.2
+        ],
+        "False": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    {
+      "name": "Node_10",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_5",
+        "Node_46"
+      ],
+      "cpt": {}
+    },
+    {
+      "name": "Node_11",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_6"
+      ],
+      "cpt": {
+        "True": [
+          0.8,
+          0.2
+        ],
+        "False": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    {
+      "name": "Node_12",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_7"
+      ],
+      "cpt": {
+        "True": [
+          0.8,
+          0.2
+        ],
+        "False": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    {
+      "name": "Node_13",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_8"
+      ],
+      "cpt": {
+        "True": [
+          0.8,
+          0.2
+        ],
+        "False": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    {
+      "name": "Node_14",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_9"
+      ],
+      "cpt": {
+        "True": [
+          0.8,
+          0.2
+        ],
+        "False": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    {
+      "name": "Node_15",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_10"
+      ],
+      "cpt": {
+        "True": [
+          0.8,
+          0.2
+        ],
+        "False": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    {
+      "name": "Node_16",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_1",
+        "Node_6"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_17",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_2",
+        "Node_7"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_18",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_3",
+        "Node_8",
+        "Node_28"
+      ],
+      "cpt": {}
+    },
+    {
+      "name": "Node_19",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_4",
+        "Node_9"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_20",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_5",
+        "Node_10"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_21",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_11",
+        "Node_16"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_22",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_12",
+        "Node_17"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_23",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_13",
+        "Node_18"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_24",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_14",
+        "Node_19"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_25",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_15",
+        "Node_20"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_26",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [],
+      "cpt": {
+        "": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "name": "Node_27",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [],
+      "cpt": {
+        "": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "name": "Node_28",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_22"
+      ],
+      "cpt": {}
+    },
+    {
+      "name": "Node_29",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [],
+      "cpt": {
+        "": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "name": "Node_30",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [],
+      "cpt": {
+        "": [
+          0.5,
+          0.5
+        ]
+      }
+    },
+    {
+      "name": "Node_31",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_26",
+        "Node_27"
+      ],
+      "cpt": {}
+    },
+    {
+      "name": "Node_32",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_27"
+      ],
+      "cpt": {
+        "True": [
+          0.8,
+          0.2
+        ],
+        "False": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    {
+      "name": "Node_33",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_28",
+        "Node_4"
+      ],
+      "cpt": {}
+    },
+    {
+      "name": "Node_34",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_29",
+        "Node_24"
+      ],
+      "cpt": {}
+    },
+    {
+      "name": "Node_35",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_30"
+      ],
+      "cpt": {
+        "True": [
+          0.8,
+          0.2
+        ],
+        "False": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    {
+      "name": "Node_36",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_31"
+      ],
+      "cpt": {
+        "True": [
+          0.8,
+          0.2
+        ],
+        "False": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    {
+      "name": "Node_37",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_32"
+      ],
+      "cpt": {
+        "True": [
+          0.8,
+          0.2
+        ],
+        "False": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    {
+      "name": "Node_38",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_33"
+      ],
+      "cpt": {
+        "True": [
+          0.8,
+          0.2
+        ],
+        "False": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    {
+      "name": "Node_39",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_34"
+      ],
+      "cpt": {
+        "True": [
+          0.8,
+          0.2
+        ],
+        "False": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    {
+      "name": "Node_40",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_35"
+      ],
+      "cpt": {
+        "True": [
+          0.8,
+          0.2
+        ],
+        "False": [
+          0.1,
+          0.9
+        ]
+      }
+    },
+    {
+      "name": "Node_41",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_26",
+        "Node_31",
+        "Node_7"
+      ],
+      "cpt": {}
+    },
+    {
+      "name": "Node_42",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_27",
+        "Node_32"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_43",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_28",
+        "Node_33"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_44",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_29",
+        "Node_34"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_45",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_30",
+        "Node_35"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_46",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_36",
+        "Node_41"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_47",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_37",
+        "Node_42"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_48",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_38",
+        "Node_43"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_49",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_39",
+        "Node_44"
+      ],
+      "cpt": {
+        "True|True": [
+          0.9,
+          0.1
+        ],
+        "True|False": [
+          0.7,
+          0.3
+        ],
+        "False|True": [
+          0.6,
+          0.4
+        ],
+        "False|False": [
+          0.05,
+          0.95
+        ]
+      }
+    },
+    {
+      "name": "Node_50",
+      "states": [
+        "True",
+        "False"
+      ],
+      "parents": [
+        "Node_40",
+        "Node_45",
+        "Node_44"
+      ],
+      "cpt": {}
+    }
+  ]
+}

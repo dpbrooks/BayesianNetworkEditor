@@ -10,21 +10,25 @@ from JSON files.
 
 ```
 BayesianNetworkEditor/
-├── main.py                      # entry point - wires Model, View, Controller together
+├── main.py                            # entry point - wires Model, View, Controller together
 ├── Model/
-│   ├── node.py                  # Node: a single variable, its states & CPT
-│   ├── network.py               # BayesianNetwork: nodes + edges (DAG), validation, save/load
-│   └── inference.py             # exact inference (enumeration-ask algorithm)
+│   ├── node.py                        # Node: a single variable, its states & CPT
+│   ├── network.py                     # BayesianNetwork: nodes + edges (DAG), validation, save/load
+│   └── inference.py                   # exact inference (enumeration-ask algorithm)
 ├── View/
-│   └── cli_view.py               # ALL print()/input() calls live here
+│   └── cli_view.py                    # ALL print()/input() calls live here
 ├── Controller/
-│   └── controller.py             # main loop; translates menu choices into
-│                                  # model calls + view calls
+│   └── controller.py                  # main loop; translates menu choices into
+│                                      # model calls + view calls
 ├── Examples/
-│   └── alarm_network.json        # classic "Burglary/Earthquake/Alarm" example (AIMA)
+    ├── 50-Node_Complex_Network.json   # 50-node network (CPT table not set)
+    ├── alarm_network.json             # classic "Burglary/Earthquake/Alarm" example (AIMA)
+│   └── subgraph_network.json          # network made up of 10 5-node networks
 │
 └── Graphics/
-    └── Alarm_Network.svg         # graphic of the "Burglary/Earthquake/Alarm" example
+    ├── 50-Node_Complex_Network.svg    # graphic of a 50-node network
+    ├── Alarm_Network.svg              # graphic of the "Burglary/Earthquake/Alarm" example
+    └── Subgraph_Network               # graphic of 10 5-node networks
 ```
 
 - **Model** (`Model/`): pure Python, no I/O. `Node` holds a variable's
