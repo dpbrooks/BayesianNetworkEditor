@@ -1,5 +1,5 @@
 """
-controller/controller.py
+Controller/controller.py
  
 BayesianNetworkController wires the Model (BayesianNetwork) and View
 (CLIView) together. It owns the main loop, dispatches menu choices to
@@ -10,9 +10,9 @@ each other.
 
 import os
  
-from model.network import BayesianNetwork, NetworkError
-from model.inference import query as run_inference, InferenceError
-from view.graph_view import GraphView
+from Model.network import BayesianNetwork, NetworkError
+from Model.inference import query as run_inference, InferenceError
+from View.graph_view import GraphView
 
 GRAPHICS_DIR = "Graphics"
  

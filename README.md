@@ -11,37 +11,37 @@ from JSON files.
 ```
 BayesianNetworkEditor/
 ├── main.py                      # entry point - wires Model, View, Controller together
-├── model/
+├── Model/
 │   ├── node.py                  # Node: a single variable, its states & CPT
 │   ├── network.py               # BayesianNetwork: nodes + edges (DAG), validation, save/load
 │   └── inference.py             # exact inference (enumeration-ask algorithm)
-├── view/
+├── View/
 │   └── cli_view.py               # ALL print()/input() calls live here
-├── controller/
+├── Controller/
 │   └── controller.py             # main loop; translates menu choices into
 │                                  # model calls + view calls
-├── examples/
+├── Examples/
 │   └── alarm_network.json        # classic "Burglary/Earthquake/Alarm" example (AIMA)
 │
 └── Graphics/
     └── Alarm_Network.svg         # graphic of the "Burglary/Earthquake/Alarm" example
 ```
 
-- **Model** (`model/`): pure Python, no I/O. `Node` holds a variable's
+- **Model** (`Model/`): pure Python, no I/O. `Node` holds a variable's
   states and CPT rows. `BayesianNetwork` owns the collection of nodes,
   enforces the DAG structure (no cycles, no dangling edges), validates
   completeness, and serializes to/from JSON. `inference.py` implements the
   enumeration-ask exact inference algorithm on top of the model.
-- **View** (`view/cli_view.py`): every `print()` and `input()` in the app.
+- **View** (`View/cli_view.py`): every `print()` and `input()` in the app.
   It only deals with plain data (strings, lists, dicts) handed to it by the
   Controller - it has no knowledge of `Node`/`BayesianNetwork` classes.
-- **Controller** (`controller/controller.py`): the glue. Runs the main
+- **Controller** (`Controller/controller.py`): the glue. Runs the main
   menu loop, calls View methods to collect input, calls Model methods to
   mutate/query state, and calls View methods again to display results or
   errors. This is the only layer that imports both Model and View.
 
 This separation means you could swap `CLIView` for a GUI or web view later
-without touching `model/` at all.
+without touching `Model/` at all.
 
 ## Running it
 
@@ -53,6 +53,8 @@ python3 main.py
 ## Usage
 Below are the available commands in command line
 Use help [command] to get usage information for each command
+Commands are case-insensitive 'add node', Add Node', and ADD NODE'
+all work
 ```
 Commands:
   Help                Displays commands and what they do
@@ -103,7 +105,7 @@ Commands:
 From the `BayesianNetworkEditor` directory, enter the load command and then enter:
 
 ```
-examples/alarm_network.json
+Examples/alarm_network.json
 ```
 
 This loads the classic "Burglary / Earthquake / Alarm / JohnCalls /

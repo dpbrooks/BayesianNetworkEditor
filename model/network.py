@@ -12,7 +12,7 @@ return values or exceptions, which the Controller translates for the View.
 import json
 import os
  
-from model.node import Node, CPTError
+from Model.node import Node, CPTError
  
  
 class NetworkError(Exception):

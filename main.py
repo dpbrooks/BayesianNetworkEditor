@@ -9,9 +9,9 @@ Usage:
     python3 main.py
 """
 
-from model.network import BayesianNetwork
-from view.cli_view import CLIView
-from controller.controller import BayesianNetworkController
+from Model.network import BayesianNetwork
+from View.cli_view import CLIView
+from Controller.controller import BayesianNetworkController
 
 
 def main():
@@ -23,7 +23,7 @@ def main():
     view.show_message(
         "Build a network from scratch, or load an example / saved "
         "file to explore inference right away.\n"
-        "Tip: try loading 'examples/alarm_network.json' to see a worked example."
+        "Tip: try loading 'Examples/alarm_network.json' to see a worked example."
     )
     controller.run()
 

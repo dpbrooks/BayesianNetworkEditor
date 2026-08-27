@@ -9,7 +9,7 @@ Public entry point:
     query(network, query_var, evidence) -> dict {state: probability}
 """
 
-from model.network import NetworkError
+from Model.network import NetworkError
 
 
 class InferenceError(Exception):
