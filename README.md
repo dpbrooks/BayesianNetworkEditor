@@ -161,10 +161,10 @@ targets.
 
 ## Graphic export
 
-Option 15 renders the current network to a standalone `.svg` file under
-`./Graphics/` (created automatically). Nodes are laid out in layers -
-level 0 for root nodes (no parents), and each other node one level below
-the deepest of its parents - with arrows drawn from each parent down to
+Export renders the current network to a standalone `.svg` file under
+`./Graphics/` (created automatically if needed). Nodes are laid out in
+layers, level 0 for root nodes (no parents), and each other node one level
+below the deepest of its parents. Arrows are drawn from each parent down to
 its children. Box width adapts to the node name's length.
 
 This is pure Python string-building (no matplotlib/graphviz/networkx
