@@ -1,3 +1,4 @@
+
 """
 Controller/controller.py
  
@@ -7,13 +8,13 @@ handler methods, and is the only layer that both calls model mutations
 AND tells the view what to display. Neither Model nor View know about
 each other.
 """
-
+ 
 import os
  
 from Model.network import BayesianNetwork, NetworkError
 from Model.inference import query as run_inference, InferenceError
 from View.graph_view import GraphView
-
+ 
 GRAPHICS_DIR = "Graphics"
  
 class BayesianNetworkController:
@@ -47,29 +48,48 @@ class BayesianNetworkController:
             "exit": None,
         }
         while True:
-            choice = self.view.show_main_menu(self.network.name, len(self.network.nodes))
-            if choice == "quit" or choice == "exit":
+            command, remainder = self.view.show_main_menu(self.network.name, len(self.network.nodes))
+            if command == "quit" or command == "exit":
                 self.view.show_goodbye()
                 break
-            handler = dispatch.get(choice)
+            handler = dispatch.get(command)
             if handler is None:
                 self.view.show_error("Not a valid option, try again.")
                 continue
             try:
-                handler()
+                handler(remainder)
             except (NetworkError, InferenceError) as e:
                 self.view.show_error(str(e))
             except Exception as e:  # last-resort guard so the CLI never crashes outright
                 self.view.show_error(f"Unexpected error: {e}")
-
-    def help(self):
+ 
+    def help(self, remainder=""):
         self.view.help(self.network.name, len(self.network.nodes))
+ 
+    @staticmethod
+    def _split_fields(remainder, count):
+        """
+        Splits `remainder` into up to `count` positional fields, filled
+        strictly left-to-right - a field can only be provided if every
+        field before it was too. Every field except the last is a single
+        whitespace-delimited token; the last field takes the rest of the
+        line verbatim (so it may contain spaces - useful for names, paths,
+        multi-value states, etc.). Missing fields come back as None so
+        callers can tell "not provided" apart from "provided as empty".
+        """
+        fields = [None] * count
+        if not remainder or count == 0:
+            return fields
+        parts = remainder.split(None, count - 1)
+        for i, p in enumerate(parts):
+            fields[i] = p
+        return fields
  
     # ------------------------------------------------------------------
     # Network Management
     # ------------------------------------------------------------------
-    def rename_network(self):
-        new_network_name = self.view.change_network_name()
+    def rename_network(self, remainder=""):
+        new_network_name = self.view.change_network_name(remainder or None)
         if not new_network_name:
             self.view.show_error("Network name cannot be empty.")
             return
@@ -83,8 +103,9 @@ class BayesianNetworkController:
     # ------------------------------------------------------------------
     # Node management
     # ------------------------------------------------------------------
-    def add_node(self):
-        name, states = self.view.get_new_node_info()
+    def add_node(self, remainder=""):
+        prefilled_name, prefilled_states = self._split_fields(remainder, 2)
+        name, states = self.view.get_new_node_info(prefilled_name, prefilled_states)
         if not name:
             self.view.show_error("Node name cannot be empty.")
             return
@@ -94,25 +115,26 @@ class BayesianNetworkController:
         self.network.add_node(name, states)
         self.view.show_success(f"Node '{name}' added with states {states}.")
  
-    def remove_node(self):
+    def remove_node(self, remainder=""):
         if not self.network.nodes:
             self.view.show_error("There are no nodes to remove.")
             return
-        name = self.view.get_node_name_to_remove(self.network.node_names())
+        name = self.view.get_node_name_to_remove(self.network.node_names(), remainder or None)
         if not name:
             return
         self.network.remove_node(name)
         self.view.show_success(f"Node '{name}' removed (and unlinked from any children).")
  
-    def rename_node(self):
+    def rename_node(self, remainder=""):
         if not self.network.nodes:
             self.view.show_error("There are no nodes to rename.")
             return
-        name = self.view.get_node_to_rename(self.network.node_names())
+        prefilled_old, prefilled_new = self._split_fields(remainder, 2)
+        name = self.view.get_node_to_rename(self.network.node_names(), prefilled_old)
         if not name:
             self.view.show_error("Node name cannot be empty.")
             return
-        new_name = self.view.get_new_node_name()
+        new_name = self.view.get_new_node_name(prefilled_new)
         if not new_name:
             self.view.show_error("Node name cannot be empty.")
             return
@@ -125,29 +147,37 @@ class BayesianNetworkController:
     # ------------------------------------------------------------------
     # Edge management
     # ------------------------------------------------------------------
-    def add_edge(self):
+    def add_edge(self, remainder=""):
         if len(self.network.nodes) < 2:
             self.view.show_error("You need at least 2 nodes to create a dependency.")
             return
-        parent, child = self.view.get_edge_info(self.network.node_names())
+        prefilled_parent, prefilled_child = self._split_fields(remainder, 2)
+        parent, child = self.view.get_edge_info(self.network.node_names(), prefilled_parent, prefilled_child)
         self.network.add_edge(parent, child)
         self.view.show_success(
             f"'{child}' now depends on '{parent}'. "
-            f"Note: '{child}' CPT was reset - define it via 'Define CPT' command."
+            f"Note: '{child}' CPT was reset - use the 'define cpt' command to redefine it."
         )
  
-    def remove_edge(self):
+    def remove_edge(self, remainder=""):
         if not self.network.nodes:
             self.view.show_error("There are no nodes yet.")
             return
-        parent, child = self.view.get_edge_info(self.network.node_names(), action="remove")
+        prefilled_parent, prefilled_child = self._split_fields(remainder, 2)
+        parent, child = self.view.get_edge_info(
+            self.network.node_names(), prefilled_parent, prefilled_child, action="remove"
+        )
         self.network.remove_edge(parent, child)
         self.view.show_success(f"Removed dependency: '{child}' no longer depends on '{parent}'.")
  
     # ------------------------------------------------------------------
     # CPT definition
     # ------------------------------------------------------------------
-    def define_cpt(self):
+    def define_cpt(self, remainder=""):
+        # Deliberately ignores `remainder`, per the one carve-out: CPT
+        # entry always walks through every prompt interactively (node
+        # selection included), even if the user typed extra text after
+        # 'define cpt' - a full probability table doesn't fit on one line.
         if not self.network.nodes:
             self.view.show_error("There are no nodes yet.")
             return
@@ -172,7 +202,7 @@ class BayesianNetworkController:
     # ------------------------------------------------------------------
     # Display
     # ------------------------------------------------------------------
-    def show_structure(self):
+    def show_structure(self, remainder=""):
         rows = []
         for name in self.network.node_names():
             node = self.network.get_node(name)
@@ -186,28 +216,28 @@ class BayesianNetworkController:
             )
         self.view.show_network_structure(self.network.name, rows)
  
-    def show_node_details(self):
+    def show_node_details(self, remainder=""):
         if not self.network.nodes:
             self.view.show_error("There are no nodes yet.")
             return
-        node_name = self.view.get_node_name_for_display(self.network.node_names())
+        node_name = self.view.get_node_name_for_display(self.network.node_names(), remainder or None)
         node = self.network.get_node(node_name)
         children = self.network.children_of(node.name)
         cpt_rows = sorted(node.cpt.items())
         self.view.show_node_details(node.name, node.states, node.parents, children, cpt_rows)
  
-    def validate_network(self):
+    def validate_network(self, remainder=""):
         problems = self.network.validate()
         self.view.show_validation_result(problems)
  
     # ------------------------------------------------------------------
     # Inference
     # ------------------------------------------------------------------
-    def run_query(self):
+    def run_query(self, remainder=""):
         if not self.network.nodes:
             self.view.show_error("There are no nodes yet.")
             return
-        query_var = self.view.get_query_variable(self.network.node_names())
+        query_var = self.view.get_query_variable(self.network.node_names(), remainder or None)
         self.network.get_node(query_var)  # validates existence, raises otherwise
  
         other_nodes = {
@@ -223,17 +253,17 @@ class BayesianNetworkController:
     # ------------------------------------------------------------------
     # Save / load / new
     # ------------------------------------------------------------------
-    def save_network(self):
+    def save_network(self, remainder=""):
         default_name = f"{self.network.name.replace(' ', '_')}.json"
-        path = self.view.get_save_path(default_name)
+        path = self.view.get_save_path(default_name, remainder or None)
         if not path:
             self.view.show_error("Save cancelled - no path given.")
             return
         self.network.save(path)
         self.view.show_success(f"Network saved to '{path}'.")
  
-    def load_network(self):
-        path = self.view.get_load_path()
+    def load_network(self, remainder=""):
+        path = self.view.get_load_path(remainder or None)
         if not path:
             self.view.show_error("Load cancelled - no path given.")
             return
@@ -243,7 +273,7 @@ class BayesianNetworkController:
             f"Loaded network '{self.network.name}' with {len(self.network.nodes)} node(s)."
         )
  
-    def new_network(self):
+    def new_network(self, remainder=""):
         if self.network.nodes:
             confirmed = self.view.confirm(
                 "This will discard the current unsaved network. Continue?"
@@ -251,14 +281,14 @@ class BayesianNetworkController:
             if not confirmed:
                 self.view.show_message("Cancelled.")
                 return
-        name = self.view.get_new_network_name()
+        name = self.view.get_new_network_name(remainder or None)
         self.network = BayesianNetwork(name=name)
         self.view.show_success(f"Started new network '{name}'.")
-
+ 
     # ------------------------------------------------------------------
     # Graphic export
     # ------------------------------------------------------------------
-    def export_graphic(self):
+    def export_graphic(self, remainder=""):
         if not self.network.nodes:
             self.view.show_error("There are no nodes to draw.")
             return
@@ -275,7 +305,7 @@ class BayesianNetworkController:
         svg_content = self.graph_view.render_svg(nodes_data)
  
         default_filename = f"{self.network.name.replace(' ', '_')}.svg"
-        filename = self.view.get_graphic_filename(default_filename)
+        filename = self.view.get_graphic_filename(default_filename, remainder or None)
         if not filename:
             self.view.show_error("Export cancelled - no filename given.")
             return

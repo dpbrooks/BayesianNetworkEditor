@@ -1,5 +1,5 @@
 """
-model/network.py
+Model/network.py
  
 Defines BayesianNetwork: a collection of Nodes connected by directed edges,
 forming a Directed Acyclic Graph (DAG). Responsible for structural integrity

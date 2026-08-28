@@ -1,5 +1,5 @@
 """
-model/node.py
+Model/node.py
  
 Defines the Node class: a single random variable in a Bayesian Network.
  

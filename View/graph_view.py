@@ -1,5 +1,5 @@
 """
-view/graph_view.py
+View/graph_view.py
  
 GraphView renders a Bayesian Network's structure (nodes + edges) as a
 standalone SVG image: a layered, top-down directed graph with parents

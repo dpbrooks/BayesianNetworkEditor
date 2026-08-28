@@ -1,5 +1,5 @@
 """
-model/inference.py
+Model/inference.py
 
 Exact probabilistic inference over a BayesianNetwork using the
 "enumeration-ask" algorithm (Russell & Norvig, AIMA). Suitable for the
