@@ -10,11 +10,12 @@ each other.
 """
  
 import os
- 
+
+from Model.inference import InferenceError
+from Model.inference import query as run_inference
 from Model.network import BayesianNetwork, NetworkError
-from Model.inference import query as run_inference, InferenceError
 from View.graph_view import GraphView
- 
+
 GRAPHICS_DIR = "Graphics"
  
 class BayesianNetworkController:
@@ -64,7 +65,7 @@ class BayesianNetworkController:
                 self.view.show_error(f"Unexpected error: {e}")
  
     def help(self, remainder=""):
-        self.view.help(self.network.name, len(self.network.nodes))
+        self.view.help(self.network.name, len(self.network.nodes), remainder)
  
     @staticmethod
     def _split_fields(remainder, count):
@@ -318,4 +319,4 @@ class BayesianNetworkController:
             f.write(svg_content)
  
         self.view.show_success(f"Network graphic saved to '{filepath}'.")
- 
+        
