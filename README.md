@@ -21,8 +21,8 @@ BayesianNetworkEditor/
 │   └── controller.py                  # main loop; translates menu choices into
 │                                      # model calls + view calls
 ├── Examples/
-    ├── 50-Node_Complex_Network.json   # 50-node network (CPT table not set)
-    ├── alarm_network.json             # classic "Burglary/Earthquake/Alarm" example (AIMA)
+│   ├── 50-Node_Complex_Network.json   # 50-node network (CPT table not set)
+│   ├── alarm_network.json             # classic "Burglary/Earthquake/Alarm" example (AIMA)
 │   └── subgraph_network.json          # network made up of 10 5-node networks
 │
 └── Graphics/
